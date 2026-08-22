@@ -1,0 +1,35 @@
+defaults:
+  - data: synthetic/simple
+  - model: npboost
+  - task: few_shot
+  # Data-generation registry: which task-specific split files to write during data generation (typically in_context and few_shot).
+  # The actual prediction task for model fitting is selected by `task` above.
+  - task_registry: all
+  # Keep null for a single run; replace with a config from configs/sweep/ for multiruns.
+  - sweep: null
+  - _self_
+
+# Global seeds used by data generation and repeated experiment runs.
+seed_list: [0, 1, 2, 3, 4]
+# UNUSED -> the fixed effect must now be specified in the data config, when running the data generation.
+# This allows for more flexible fixed-effect specification, e.g. different fixed effects for different datasets.
+effect_list_synthetic_simple: [linear_1D, linear_2D, step_1D, step_2D]
+device: cuda
+# Number of samples used when computing CRPS for NP and NPBoost models.
+crps_samples: 20
+
+wandb:
+  enabled: true
+  # REQUIRED: Change this to your own W&B entity/account before logging runs.
+  entity: ken-r-ethz
+  # Project name for W&B runs
+  project: ${data.experiment.name}
+  group: ${model.name}
+  mode: online
+
+# UNUSED -> the data directories are now set in src.data.data_layout. Kept for compatibility.
+paths:
+  # Project root used to resolve raw and split data folders.
+  root: .
+  raw_data: ${paths.root}/data/raw
+  split_data: ${paths.root}/data/split

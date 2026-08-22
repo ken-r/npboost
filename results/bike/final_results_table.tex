@@ -1,0 +1,18 @@
+\begin{table*}[t]
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{3pt}
+
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lccccccccccc}
+        \toprule
+        Scenario & Metric & NPBoost & ANPBoost & NP & ANP & Task-ID GBT & GBT & GPLinear & LME & TabICL\_T & TabICL\_P \\
+        \midrule
+        within-task & RMSE & 0.287$\pm$0.009 & \textbf{0.282}$\pm$0.009 & 0.294$\pm$0.008 & 0.296$\pm$0.010 & 0.302$\pm$0.006 & 0.322$\pm$0.006 & 0.429$\pm$0.005 & 0.580$\pm$0.006 & 0.547$\pm$0.008 & 0.309$\pm$0.006 \\
+        within-task & CRPS & 0.129$\pm$0.008 & 0.124$\pm$0.006 & 0.121$\pm$0.003 & 0.124$\pm$0.006 & -- & -- & 0.200$\pm$0.002 & 0.325$\pm$0.002 & 0.276$\pm$0.004 & \textbf{0.108}$\pm$0.001 \\
+        few-shot & RMSE & 0.588$\pm$0.070 & 0.550$\pm$0.058 & 0.577$\pm$0.063 & 0.551$\pm$0.054 & 0.706$\pm$0.091 & 0.755$\pm$0.115 & 0.646$\pm$0.086 & 0.664$\pm$0.029 & 0.690$\pm$0.032 & \textbf{0.351}$\pm$0.028 \\
+        few-shot & CRPS & 0.340$\pm$0.032 & 0.322$\pm$0.022 & 0.316$\pm$0.036 & 0.292$\pm$0.036 & -- & -- & 0.325$\pm$0.040 & 0.395$\pm$0.020 & 0.375$\pm$0.016 & \textbf{0.151}$\pm$0.010 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table*}

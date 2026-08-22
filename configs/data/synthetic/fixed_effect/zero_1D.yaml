@@ -1,0 +1,4 @@
+name: zero_1D
+_target_: src.data.generator.LinearFixedEffect
+slopes: [0.0]
+intercept: 0.0

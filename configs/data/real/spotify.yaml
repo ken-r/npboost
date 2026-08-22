@@ -1,0 +1,32 @@
+# @package data
+defaults:
+  - real/base
+  - _self_
+
+type: real
+
+experiment:
+  name: spotify
+  response_name: danceability
+  seed: 0
+  split_data_seed: 0
+
+
+provider:
+  _target_: src.data.generator.SpotifyDataProvider
+
+  transforms: 
+  - _target_: src.data.transforms.DummyEncoder
+    columns: ["playlist_genre", "key", "mode"]
+  - _target_: src.data.transforms.Standardizer
+    columns: ["energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo", "duration_ms"]
+  response_column_names: ["danceability"]
+  
+
+split_params:
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  n_validation_groups: 100
+  n_test_groups: 100
+  n_support_validation: 7
+  n_support_test: 7

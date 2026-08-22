@@ -1,0 +1,4 @@
+name: lognormal
+_target_: src.data.generator.LogNormalNoise
+sigma: 1.0
+variance: 0.25

@@ -1,0 +1,15 @@
+# @package data
+defaults:
+  - synthetic/base
+  - synthetic/fixed_effect: steps_1D
+  - synthetic/random_effect: brownian_motion
+  - synthetic/noise: lognormal
+  - _self_
+
+n_subjects: 600
+n_observations_per_subject: 100
+
+experiment:
+  name: brownian_lognormal
+  seed: 42
+  split_data_seed: 0

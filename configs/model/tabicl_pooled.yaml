@@ -1,0 +1,10 @@
+_target_: src.training.experiment_runner.TabICLPooledExperiment
+name: tabicl_pooled
+wandb_enabled: ${wandb.enabled}
+device: ${device}
+
+n_estimators: 8
+validation_metric: rmse
+crps_alphas: null
+model_params:
+  n_jobs: 1

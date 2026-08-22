@@ -1,0 +1,38 @@
+# @package _global_
+defaults:
+  - override /model: gbm_group_cat
+  - override /hydra/sweeper: optuna
+  - override /hydra/sweeper/sampler: random
+  - override /hydra/launcher: joblib
+  - _self_
+
+# Hydra Configuration
+hydra:
+  mode: MULTIRUN
+  # REQUIRED: Change both output paths for your system.
+  run:
+    dir: /userdata/${oc.env:USER}/hydra_outputs/outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: /userdata/${oc.env:USER}/hydra_outputs/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra:job.num}
+
+  sweeper:
+    sampler:
+      _target_: optuna.samplers.RandomSampler
+      seed: ${data.experiment.seed}
+
+    n_trials: 32
+    params:
+      model.train_params.learning_rate: tag(log, interval(0.01, 1.0))
+      model.train_params.lambda_l2: choice(0, 1)
+      model.train_params.min_data_in_leaf: choice(10, 20, 100, 1000)
+      model.train_params.num_leaves: choice(2, 4, 8, 16, 32, 64)
+      model.train_params.max_bin: choice(255, 500, 1000)
+      model.train_params.max_depth: choice(-1)
+
+  launcher:
+    _target_: hydra_plugins.hydra_joblib_launcher.joblib_launcher.JoblibLauncher
+    n_jobs: 1
+
+  job:
+    chdir: true

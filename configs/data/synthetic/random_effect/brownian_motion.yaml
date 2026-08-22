@@ -1,0 +1,5 @@
+name: brownian_motion
+_target_: src.data.generator.BrownianMotionRandomEffect
+variance: 1
+alpha: 1e-6
+lower_bound: ${data.features_domain[0]}

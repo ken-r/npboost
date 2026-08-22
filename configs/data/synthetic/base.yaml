@@ -1,0 +1,57 @@
+# @package data
+type: synthetic
+
+experiment:
+  # Dataset name used in paths, logs, and W&B metadata.
+  name: ???
+  # Default experiment seed.
+  seed: 42
+  # Selects which pre-generated split seed to load for a run.
+  split_data_seed: 0
+
+# Number of groups/functions in the generated dataset.
+n_subjects: 600
+# Number of observations sampled per group/function.
+n_observations_per_subject: 100
+# Batch size for Neural Process style models; model configs reference this.
+np_batch_size: 16
+# Input domain for generated synthetic features.
+features_domain: [-2, 2]
+# Extra predictor columns that do not affect the generated response.
+n_irrelevant_features: 0
+# Raw/split synthetic data is generated once for each seed in this list.
+generation_seed_list: ${seed_list}
+
+# Split settings consumed by task configs during data generation.
+split_params:
+  # Fractions used by the in-context task within each group.
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  # Number of held-out groups used by few-shot style tasks.
+  n_validation_groups: 100
+  n_test_groups: 100
+  # Number of support points sampled inside each few-shot validation/test group.
+  n_support_validation: 20
+  n_support_test: 20
+  # The seeds used for the synthetic data generation. It creates one dataset for each seed in this list, 
+  # and the split files are generated for each dataset.
+  seed_list: ${data.generation_seed_list}
+
+provider:
+  # Hydra-instantiated provider that generates and loads synthetic data.
+  _target_: src.data.generator.SyntheticDataProvider
+  experiment_name: ${data.experiment.name}
+  n_subjects: ${data.n_subjects}
+  n_observations_per_subject: ${data.n_observations_per_subject}
+  features_domain: ${data.features_domain}
+  fixed_effect: ${data.synthetic.fixed_effect}
+  random_effect: ${data.synthetic.random_effect}
+  noise: ${data.synthetic.noise}
+  seed_list: ${data.generation_seed_list}
+  n_irrelevant_features: ${data.n_irrelevant_features}
+
+  transforms: []
+
+# THIS IS UNUSED AND NOT IMPLEMENTED, BUT KEPT FOR REPRODUCIBILTY REASONS / BACKWARD COMPATIBILITY
+# FOR REAL DATASETS, you may use `random_effect_drop_columns`
+gp_coord_drop_column_names: []

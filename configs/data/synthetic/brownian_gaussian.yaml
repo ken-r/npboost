@@ -1,0 +1,30 @@
+# @package data
+defaults:
+  - synthetic/base
+  - synthetic/fixed_effect: ???
+  - synthetic/random_effect: brownian_motion
+  - synthetic/noise: homoscedastic_gaussian
+  - _self_
+
+synthetic:
+  noise:
+    std: 0.5
+
+
+experiment:
+  name: brownian_gaussian
+  seed: 42
+  split_data_seed: 0
+
+n_subjects: 600
+n_observations_per_subject: 100
+
+
+split_params:
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  n_validation_groups: 100
+  n_test_groups: 100
+  n_support_validation: 20
+  n_support_test: 20
+  seed_list: ${data.generation_seed_list}

@@ -1,0 +1,50 @@
+_target_: src.training.experiment_runner.NPBoostExperiment
+name: npboost
+device: ${device}
+crps_samples: ${crps_samples}
+wandb_enabled: ${wandb.enabled}
+
+max_boosting_rounds: 500
+validation_metric: rmse
+min_delta: 0.00001
+patience: 25
+restore_best_model: true
+compute_aux_validation_metrics: true
+
+np_params:
+  y_dim: 1
+
+  # Neural Process Parameters
+  r_dim: 128
+  z_dim: 128
+  encoder_hidden_dims: [256, 256]
+  decoder_hidden_dims: [128, 128, 128, 128]
+  n_z_samples_train: 20
+  n_z_samples_test: 20
+  activation: "relu"
+  dropout: 0.0
+  use_attention: false
+  num_heads: 8
+  
+
+lgbm_params:
+  learning_rate: 0.05
+  feature_fraction: 1.0
+  lambda_l2: 0
+  min_data_in_leaf: 20
+  num_leaves: 5
+  max_bin: 255
+  max_depth: -1
+  line_search_step_length: false
+  objective: regression
+  verbose: -1
+  seed: ${data.experiment.seed}
+  deterministic: true
+  num_threads: 1
+
+# Training parameters
+np_train_params:
+  batch_size: ${data.np_batch_size}
+  learning_rate: 1e-3
+  epochs_per_round: 10
+  use_linear_lr_scheduler: false

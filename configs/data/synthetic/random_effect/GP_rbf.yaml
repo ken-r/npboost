@@ -1,0 +1,5 @@
+name: GP_rbf
+_target_: src.data.generator.RBFGPRandomEffect
+length_scale: 0.5
+variance: 1.0
+alpha: 1e-6

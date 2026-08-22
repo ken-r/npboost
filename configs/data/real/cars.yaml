@@ -1,0 +1,35 @@
+# @package data
+defaults:
+  - real/base
+  - _self_
+
+type: real
+
+experiment:
+  name: cars
+  response_name: log_price
+  seed: 0
+  split_data_seed: 0
+
+
+provider:
+  _target_: src.data.generator.CarsDataProvider
+
+  transforms: 
+  - _target_: src.data.transforms.MedianImputer
+    columns: ["odometer"]
+  - _target_: src.data.transforms.NACategoryImputer
+    columns: ["drive", "transmission", "condition"]
+  - _target_: src.data.transforms.Standardizer
+    columns: ["year", "odometer", "lat", "long"]
+  - _target_: src.data.transforms.DummyEncoder
+    columns: ["manufacturer", "drive", "transmission", "condition"]
+  response_column_names: [log_price]
+
+split_params:
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  n_validation_groups: 200
+  n_test_groups: 200
+  n_support_validation: 7
+  n_support_test: 7

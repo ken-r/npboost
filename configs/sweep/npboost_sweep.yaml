@@ -1,0 +1,43 @@
+# @package _global_
+defaults:
+  - override /model: npboost
+  - override /hydra/sweeper: optuna
+  - override /hydra/sweeper/sampler: random
+  - override /hydra/launcher: joblib
+  - _self_
+
+# Hydra Configuration
+hydra:
+  mode: MULTIRUN
+  # REQUIRED: Change both output paths for your system.
+  run:
+    dir: /userdata/${oc.env:USER}/hydra_outputs/outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: /userdata/${oc.env:USER}/hydra_outputs/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra:job.num}
+
+  sweeper:
+    sampler:
+      _target_: optuna.samplers.RandomSampler
+      seed: ${data.experiment.seed}
+    
+    n_trials: 32
+    params:
+      model.np_params.dropout: choice(0.0, 0.2)
+      model.np_train_params.learning_rate: tag(log, interval(1e-5,1e-3))
+      model.np_train_params.epochs_per_round: choice(5, 10, 20)
+
+      # Boosting Parameters
+      model.lgbm_params.learning_rate: tag(log, interval(0.01, 1.0))
+      model.lgbm_params.lambda_l2: choice(0, 1)
+      model.lgbm_params.min_data_in_leaf: choice(10, 20, 100, 1000)
+      model.lgbm_params.num_leaves: choice(4, 8, 16)
+      model.lgbm_params.max_bin: choice(255)
+      model.lgbm_params.max_depth: choice(-1)
+  
+  launcher:
+    _target_: hydra_plugins.hydra_joblib_launcher.joblib_launcher.JoblibLauncher
+    n_jobs: 1
+
+  job:
+    chdir: true

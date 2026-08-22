@@ -1,0 +1,31 @@
+# @package data
+defaults:
+  - synthetic/base
+  - synthetic/fixed_effect: ???
+  - synthetic/random_effect: GP_rbf
+  - synthetic/noise: homoscedastic_gaussian
+  - _self_
+
+synthetic:
+  noise:
+    std: 0.5
+
+
+experiment:
+  name: gp_gaussian_very_many_groups
+  seed: 42
+  split_data_seed: 0
+
+n_subjects: 1200
+n_observations_per_subject: 50
+np_batch_size: 64
+
+
+split_params:
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  n_validation_groups: 200
+  n_test_groups: 200
+  n_support_validation: 10
+  n_support_test: 10
+  seed_list: ${data.generation_seed_list}

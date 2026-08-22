@@ -1,0 +1,3 @@
+name: zero_noise
+_target_: src.data.generator.HomoscedasticGaussianNoise
+std: 0.0

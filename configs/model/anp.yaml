@@ -1,0 +1,32 @@
+_target_: src.training.experiment_runner.NPExperiment
+name: anp
+device: ${device}
+crps_samples: ${crps_samples}
+wandb_enabled: ${wandb.enabled}
+
+max_epochs: 4000
+validation_metric: rmse
+min_delta: 0.00001
+patience: 200
+restore_best_model: true
+
+
+params:
+  y_dim: 1
+  r_dim: 128
+  z_dim: 128
+  encoder_hidden_dims: [256, 256]
+  decoder_hidden_dims: [128, 128, 128, 128]
+  n_z_samples_train: 20
+  n_z_samples_test: 20
+  activation: "relu"
+  dropout: 0.0
+  use_attention: true
+  num_heads: 8
+
+
+# Training parameters
+train_params:
+  batch_size: ${data.np_batch_size}
+  learning_rate: 1e-3
+

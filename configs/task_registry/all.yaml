@@ -1,0 +1,8 @@
+# configs/task_registry/all.yaml
+# This lists the basic most common prediction task that are used in the experiments: in-context and few-shot prediction tasks.
+# Used during data generation to generate the data splits for both prediction task setups.
+# For running the model, the task is selected by the `task` config in configs/config.yaml.
+defaults:
+  - /task@in_context: in_context
+  - /task@few_shot: few_shot
+  - _self_

@@ -1,0 +1,6 @@
+_target_: src.task.in_context.InContext
+# Fraction of each training group used as context during NP training.
+training_context_size: 0.5
+# Validation/test fractions are defined by the selected data config.
+validation_size: ${data.split_params.in_context_validation_size}
+test_size: ${data.split_params.in_context_test_size}

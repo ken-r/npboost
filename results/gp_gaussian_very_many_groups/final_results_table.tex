@@ -1,0 +1,23 @@
+\begin{table*}[t]
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{3pt}
+
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lllcccccccccc}
+        \toprule
+        Fixed Effect & Scenario & Metric & NPBoost & ANPBoost & NP & ANP & Task-ID GBT & GBT & GPLinear & LME & TabICL\_T & TabICL\_P \\
+        \midrule
+        \multirow{4}{*}{Steps $1$D} & within-task & RMSE & 0.628$\pm$0.003 & \textbf{0.623}$\pm$0.002 & 0.646$\pm$0.002 & \textbf{0.623}$\pm$0.002 & 0.658$\pm$0.003 & 1.119$\pm$0.001 & 0.778$\pm$0.002 & 1.288$\pm$0.003 & 0.833$\pm$0.002 & 1.116$\pm$0.001 \\
+         & within-task & CRPS & 0.353$\pm$0.002 & \textbf{0.351}$\pm$0.001 & 0.362$\pm$0.001 & \textbf{0.351}$\pm$0.001 & -- & -- & 0.427$\pm$0.001 & 0.734$\pm$0.001 & 0.468$\pm$0.001 & 0.630$\pm$0.001 \\
+         & few-shot & RMSE & 0.767$\pm$0.008 & \textbf{0.743}$\pm$0.008 & 0.773$\pm$0.007 & 0.749$\pm$0.009 & 1.119$\pm$0.010 & 1.119$\pm$0.010 & 1.001$\pm$0.007 & 1.319$\pm$0.008 & 1.121$\pm$0.005 & 1.121$\pm$0.010 \\
+         & few-shot & CRPS & 0.427$\pm$0.004 & \textbf{0.414}$\pm$0.004 & 0.431$\pm$0.003 & 0.417$\pm$0.004 & -- & -- & 0.542$\pm$0.004 & 0.752$\pm$0.004 & 0.640$\pm$0.003 & 0.633$\pm$0.006 \\
+        \cmidrule(lr){1-13}
+        \multirow{4}{*}{Steps $2$D} & within-task & RMSE & 0.974$\pm$0.003 & \textbf{0.954}$\pm$0.004 & 1.001$\pm$0.006 & \textbf{0.954}$\pm$0.004 & 1.032$\pm$0.004 & 1.120$\pm$0.003 & 1.115$\pm$0.004 & 1.462$\pm$0.003 & 1.337$\pm$0.003 & 1.126$\pm$0.003 \\
+         & within-task & CRPS & 0.549$\pm$0.002 & 0.537$\pm$0.002 & 0.564$\pm$0.003 & \textbf{0.536}$\pm$0.002 & -- & -- & 0.616$\pm$0.002 & 0.831$\pm$0.001 & 0.764$\pm$0.001 & 0.635$\pm$0.002 \\
+         & few-shot & RMSE & 1.043$\pm$0.004 & 1.025$\pm$0.004 & 1.054$\pm$0.005 & \textbf{1.024}$\pm$0.004 & 1.115$\pm$0.005 & 1.115$\pm$0.005 & 1.305$\pm$0.005 & 1.473$\pm$0.009 & 1.511$\pm$0.010 & 1.121$\pm$0.005 \\
+         & few-shot & CRPS & 0.588$\pm$0.002 & \textbf{0.577}$\pm$0.003 & 0.595$\pm$0.003 & \textbf{0.577}$\pm$0.002 & -- & -- & 0.728$\pm$0.003 & 0.838$\pm$0.005 & 0.897$\pm$0.006 & 0.633$\pm$0.003 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table*}

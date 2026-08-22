@@ -1,0 +1,7 @@
+_target_: src.task.few_shot.FewShot
+# Few-shot split sizes are defined by the selected data config.
+n_validation_groups: ${data.split_params.n_validation_groups}
+n_test_groups: ${data.split_params.n_test_groups}
+# Support points are observed context points inside validation/test groups.
+n_support_validation: ${data.split_params.n_support_validation}
+n_support_test: ${data.split_params.n_support_test}

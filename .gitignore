@@ -1,0 +1,9 @@
+__pycache__/
+/src/.pytest_cache
+/outputs
+/data
+/models
+/npboost_env
+.flake8
+/multirun
+*.egg-info/*

@@ -1,0 +1,30 @@
+# @package data
+defaults:
+  - real/base
+  - _self_
+
+type: real
+
+experiment:
+  name: bike
+  response_name: log_count
+  seed: 0
+  split_data_seed: 0
+
+
+provider:
+  _target_: src.data.generator.BikeDataProvider
+
+  transforms:
+  - _target_: src.data.transforms.Standardizer
+    columns: ["temperature", "humidity", "rainfall"]
+  response_column_names: ["log_count"]
+
+split_params:
+  in_context_validation_size: 0.25
+  in_context_test_size: 0.25
+  # SEE bike_temporal_few_shot_splits.ipynb !
+  n_validation_groups: 70 # NOT USED IN THIS DATASET, BUT REQUIRED FOR THE GENERATOR
+  n_test_groups: 70 # NOT USED IN THIS DATASET, BUT REQUIRED FOR THE GENERATOR
+  n_support_validation: 7
+  n_support_test: 7

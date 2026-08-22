@@ -1,0 +1,4 @@
+_target_: src.training.experiment_runner.GPLinearExperiment
+name: gplinear
+kernel: matern
+validation_metric: rmse

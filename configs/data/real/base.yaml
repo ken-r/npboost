@@ -1,0 +1,38 @@
+# @package data
+type: real
+# Batch size for NP and NPBoost models; Used by model configs.
+np_batch_size: 16
+
+# Split settings consumed by task configs; dataset configs must fill these in.
+split_params:
+  # Fractions used by the in-context task within each group.
+  in_context_validation_size: ???
+  in_context_test_size: ???
+  # Number of held-out groups used by few-shot style tasks.
+  n_validation_groups: ???
+  n_test_groups: ???
+  # Number of support points sampled inside each few-shot validation/test group.
+  n_support_validation: ???
+  n_support_test: ???
+  # Split files are generated once for each seed in this list.
+  seed_list: ${seed_list}
+
+
+provider:
+  # Dataset-specific provider class, set in configs/data/real/<dataset>.yaml.
+  _target_: ???
+  experiment_name: ${data.experiment.name}
+  # Response columns that we want to model.
+  response_column_names: ${data.response_column_names}
+  split_seed_list: ${data.split_params.seed_list}
+  # spatial columns to be marked with spatial column prefix -> currently does nothing
+  # if one wants to treat them differently, can implement some change in datasets.py or implement custom provider class.
+  spatial_columns: []
+  spatial_id: ""
+  # Drops groups with fewer observations before splitting.
+  min_group_size: 10
+  # Columns excluded from random-effect / GP coordinate inputs.
+  random_effect_drop_columns: []
+
+  # Optional preprocessing pipeline instantiated by Hydra; e.g. standardization, one-hot encoding, ...
+  transforms: []

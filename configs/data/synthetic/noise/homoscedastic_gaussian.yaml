@@ -1,0 +1,3 @@
+name: homoscedastic_gaussian
+_target_: src.data.generator.HomoscedasticGaussianNoise
+std: 0.1
